@@ -54,6 +54,12 @@ function craps() {
       ...pointBets,
       player1: oldbalance,
     });
+    let oldbankroll = StartingBalance.player1;
+    let newbankroll = oldbankroll - 1;
+    setStartingBalance({
+      ...StartingBalance,
+      player1: newbankroll,
+    });
   };
   const setPassLinefunction = (index) => {
     let oldbalance = passLine.player1;
@@ -97,7 +103,9 @@ function craps() {
         indexofPlacebet = 5;
         break;
     }
-    if (indexofPlacebet !== null && thePoint != null) {
+
+    if (thePoint != null && currentRollnumber === 7) {
+    } else if (indexofPlacebet !== null && thePoint != null) {
       let newPayout = pointBets.player1[indexofPlacebet] * 2;
       let oldBalance = StartingBalance.player1;
       let finalPayout = newPayout + oldBalance;
@@ -123,6 +131,7 @@ function craps() {
       setthePoint(null);
       setPointWinner(true);
     }
+    console.log(thePoint, "####");
 
     if (dice1 === dice2) {
       setHard("Hard");
@@ -131,9 +140,8 @@ function craps() {
     }
 
     setdiceroll([dice1, dice2]);
-    console.log(pointBets, "place bets inside rooll");
   };
-  console.log(betState, "the bet state");
+
   return (
     <div>
       <h2>the point is {thePoint}</h2>
