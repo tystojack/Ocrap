@@ -83,26 +83,113 @@ function craps() {
     let currentRollnumber = dice1 + dice2;
     let indexofPlacebet = null;
     //paying placebets
-    switch (currentRollnumber) {
-      case (currentRollnumber = 4):
-        indexofPlacebet = 0;
-        break;
-      case (currentRollnumber = 5):
-        indexofPlacebet = 1;
-        break;
-      case (currentRollnumber = 6):
-        indexofPlacebet = 2;
-        break;
-      case (currentRollnumber = 8):
-        indexofPlacebet = 3;
-        break;
-      case (currentRollnumber = 9):
-        indexofPlacebet = 4;
-        break;
-      case (currentRollnumber = 10):
-        indexofPlacebet = 5;
-        break;
+    console.log(currentRollnumber, thePoint);
+    let result = "come out";
+    if (thePoint === null) {
+      switch (currentRollnumber) {
+        case (currentRollnumber = 2):
+          console.log("2 craps");
+
+          result = "craps";
+          indexofPlacebet = 0;
+          break;
+        case (currentRollnumber = 3):
+          console.log("craps 3");
+          result = "craps";
+          indexofPlacebet = 0;
+          break;
+        case (currentRollnumber = 4):
+          console.log("point is 4");
+          setthePoint(currentRollnumber);
+          result = [0, 1, 2];
+          indexofPlacebet = 0;
+          break;
+        case (currentRollnumber = 5):
+          console.log("point is 5");
+          setthePoint(currentRollnumber);
+          indexofPlacebet = 1;
+          break;
+        case (currentRollnumber = 6):
+          console.log("point is 6");
+          setthePoint(currentRollnumber);
+          indexofPlacebet = 2;
+          break;
+        case (currentRollnumber = 7):
+          console.log("winner");
+          result = "winner";
+          indexofPlacebet = 2;
+          break;
+        case (currentRollnumber = 8):
+          console.log("point is 8");
+          setthePoint(currentRollnumber);
+          indexofPlacebet = 3;
+          break;
+        case (currentRollnumber = 9):
+          console.log("point is 9");
+          setthePoint(currentRollnumber);
+          indexofPlacebet = 4;
+
+          break;
+        case (currentRollnumber = 10):
+          setthePoint(currentRollnumber);
+          console.log("point is 10");
+          indexofPlacebet = 5;
+          break;
+      }
+    } else if (thePoint !== null) {
+      switch (currentRollnumber) {
+        case (currentRollnumber = thePoint):
+          console.log("point winner");
+          setthePoint(null);
+          break;
+        case (currentRollnumber = 2):
+          console.log("hello world 2");
+          result = "craps";
+          indexofPlacebet = 0;
+          break;
+        case (currentRollnumber = 3):
+          console.log("hello world 3");
+          result = "craps";
+          indexofPlacebet = 0;
+          break;
+        case (currentRollnumber = 4):
+          console.log("point is 4");
+          result = [0, 1, 2];
+          indexofPlacebet = 0;
+          break;
+        case (currentRollnumber = 5):
+          console.log("point is 5");
+          indexofPlacebet = 1;
+          break;
+        case (currentRollnumber = 6):
+          console.log("point is 6");
+          indexofPlacebet = 2;
+          break;
+        case (currentRollnumber = 7):
+          console.log("7 out");
+          result = "7 out";
+          setpointBets({
+            ...pointBets,
+            player1: [0, 0, 0, 0, 0, 0],
+          });
+          setthePoint(null);
+          break;
+        case (currentRollnumber = 8):
+          console.log("point is 8");
+          indexofPlacebet = 3;
+          break;
+        case (currentRollnumber = 9):
+          console.log("point is 9");
+          indexofPlacebet = 4;
+
+          break;
+        case (currentRollnumber = 10):
+          console.log("point is 10");
+          indexofPlacebet = 5;
+          break;
+      }
     }
+    console.log(result);
 
     if (thePoint != null && currentRollnumber === 7) {
     } else if (indexofPlacebet !== null && thePoint != null) {
@@ -115,23 +202,24 @@ function craps() {
       });
     }
 
-    if (
-      thePoint === null &&
-      currentRollnumber !== 3 &&
-      currentRollnumber !== 2 &&
-      currentRollnumber !== 12 &&
-      currentRollnumber !== 7
-    ) {
-      //setting the point
-      setthePoint(currentRollnumber);
-    } else if (thePoint !== null && currentRollnumber === 7) {
-      setthePoint(null);
-      setPointWinner(false);
-    } else if (thePoint === currentRollnumber) {
-      setthePoint(null);
-      setPointWinner(true);
-    }
-    console.log(thePoint, "####");
+    // if (
+    //   thePoint === null &&
+    //   currentRollnumber !== 3 &&
+    //   currentRollnumber !== 2 &&
+    //   currentRollnumber !== 12 &&
+    //   currentRollnumber !== 7
+    // ) {
+    //   //setting the point
+    //   setthePoint(currentRollnumber);
+    // } else if (thePoint !== null && currentRollnumber === 7) {
+    //   setthePoint(null);
+    //   setPointWinner(false);
+    // } else if (thePoint === currentRollnumber) {
+    //   setthePoint(null);
+    //   setPointWinner(true);
+    // }
+
+    //point logic
 
     if (dice1 === dice2) {
       setHard("Hard");
