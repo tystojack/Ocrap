@@ -31,7 +31,7 @@ function craps() {
   const [StartingBalance, setStartingBalance] = useState({ player1: 300 });
 
   const [passLine, setPassLine] = useState({
-    player1: [0, 0, 0, 0],
+    player1: [0, 0],
   });
   const [pointBets, setpointBets] = useState({
     player1: [0, 0, 0, 0, 0, 0],
@@ -68,7 +68,12 @@ function craps() {
     let newnumber = oldnumber + 1;
     oldbalance.splice(index, 1, newnumber);
     console.log(oldbalance);
-
+    let oldbankroll = StartingBalance.player1;
+    let newbankroll = oldbankroll - 1;
+    setStartingBalance({
+      ...StartingBalance,
+      player1: newbankroll,
+    });
     setPassLine({
       ...passLine,
       player1: oldbalance,
@@ -91,12 +96,20 @@ function craps() {
           console.log("2 craps");
 
           result = "craps";
-          indexofPlacebet = 0;
+          setPassLine({
+            ...passLine,
+            player1: [0,0],
+          });
+       
           break;
         case (currentRollnumber = 3):
           console.log("craps 3");
           result = "craps";
-          indexofPlacebet = 0;
+          setPassLine({
+            ...passLine,
+            player1: [0,0],
+          });
+         
           break;
         case (currentRollnumber = 4):
           console.log("point is 4");
@@ -117,7 +130,15 @@ function craps() {
         case (currentRollnumber = 7):
           console.log("winner");
           result = "winner";
-          indexofPlacebet = 2;
+
+          let newPayout = passLine.player1[0]  ;
+          let oldBalance = StartingBalance.player1;
+          let finalPayout = newPayout + oldBalance;
+          setStartingBalance({
+            ...StartingBalance,
+            player1: finalPayout
+          })
+          
           break;
         case (currentRollnumber = 8):
           console.log("point is 8");
@@ -135,6 +156,30 @@ function craps() {
           console.log("point is 10");
           indexofPlacebet = 5;
           break;
+        case (currentRollnumber = 11):
+        
+          console.log("winner");
+          result = "winner";
+
+           newPayout = passLine.player1[0]  ;
+           oldBalance = StartingBalance.player1;
+           finalPayout = newPayout + oldBalance;
+          setStartingBalance({
+            ...StartingBalance,
+            player1: finalPayoutcd 
+          })
+         
+          break;
+          case (currentRollnumber = 12):
+            console.log("12 craps");
+  
+            result = "craps";
+            setPassLine({
+              ...passLine,
+              player1: [0,0],
+            });
+         
+            break;
       }
     } else if (thePoint !== null) {
       switch (currentRollnumber) {
@@ -297,6 +342,9 @@ function craps() {
       >
         Passline
       </Passline>
+      <Passline onClick={()=> {
+        setPassLinefunction(1)
+      }}>Odds</Passline>
       {/* <Dontpassline>Don't Passline</Dontpassline> */}
     </div>
   );
