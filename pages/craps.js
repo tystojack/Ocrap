@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { startTransition, useState } from "react";
 import styled from "styled-components";
 import { useTheme } from "styled-components";
 
@@ -43,6 +43,7 @@ function craps() {
   const [thePoint, setthePoint] = useState(null);
   const [pointWinner, setPointWinner] = useState(null);
 
+
   const setPlacebets = (index) => {
     let oldbalance = pointBets.player1;
     let oldnumber = pointBets.player1[index];
@@ -79,17 +80,51 @@ function craps() {
       player1: oldbalance,
     });
   };
-  const Payout = () => {
-    console.log(pointbets, "placebets inside");
-  };
+  // if (thePoint != null && currentRollnumber === 7) {
+    //     } else if (indexofPlacebet !== null && thePoint != null) {
+    // let payout = null;
+    // if (currentRollnumber == 10 || 4) {
+    //   payout == 100;
+    // } else if (currentRollnumber == 6 || 8) {
+    //     payout == .83333;
+    // } else if(currentRollnumber ==5 || 9) {
+    //   payout== 22;
+    // }
+    //       console.log(currentRollnumber, "current roll number inside")
+    //       console.log(payout, "payout the money")
+    //       let newPayout = pointBets.player1[indexofPlacebet] * payout;
+    //       let oldBalance = StartingBalance.player1;
+    //       let finalPayout = newPayout + oldBalance;
+    //       setStartingBalance({
+    //         ...StartingBalance,
+    //         player1: finalPayout,
+    //       });
+    //     }
+
   const Rollthedice = () => {
     let dice1 = Math.floor(Math.random() * 6) + 1;
     let dice2 = Math.floor(Math.random() * 6) + 1;
     let currentRollnumber = dice1 + dice2;
+    setdiceroll([dice1, dice2]);
     let indexofPlacebet = null;
     //paying placebets
-    console.log(currentRollnumber, thePoint);
+    console.log(dice1, dice2,currentRollnumber, thePoint, "current roll number inside roll");
     let result = "come out";
+
+    const payoutPlaceBets = (pointIndex,payout)=> {
+              let newPayout = pointBets.player1[pointIndex] * payout;
+          let oldBalance = StartingBalance.player1;
+          let finalPayout = newPayout + oldBalance;
+          setStartingBalance({
+            ...StartingBalance,
+            player1: finalPayout,
+          });
+// return setpointBets({
+//   ...pointBets,
+//   player1: finalPayout
+
+// })
+    }
     if (thePoint === null) {
       switch (currentRollnumber) {
         case (currentRollnumber = 2):
@@ -166,7 +201,7 @@ function craps() {
            finalPayout = newPayout + oldBalance;
           setStartingBalance({
             ...StartingBalance,
-            player1: finalPayoutcd 
+            player1: finalPayout
           })
          
           break;
@@ -186,6 +221,12 @@ function craps() {
         case (currentRollnumber = thePoint):
           console.log("point winner");
           setthePoint(null);
+        let   oldBalance = StartingBalance.player1 + passLine.player1[0]
+
+          setStartingBalance({
+            ...StartingBalance,
+            player1: oldBalance,
+          });
           break;
         case (currentRollnumber = 2):
           console.log("hello world 2");
@@ -198,17 +239,24 @@ function craps() {
           indexofPlacebet = 0;
           break;
         case (currentRollnumber = 4):
-          console.log("point is 4");
+          console.log("roll is 4");
           result = [0, 1, 2];
+          setpointBets({
+            pointBets
+          })
+          
           indexofPlacebet = 0;
+          payoutPlaceBets(indexofPlacebet,1);
           break;
         case (currentRollnumber = 5):
           console.log("point is 5");
           indexofPlacebet = 1;
+          payoutPlaceBets(indexofPlacebet,2);
           break;
         case (currentRollnumber = 6):
           console.log("point is 6");
           indexofPlacebet = 2;
+          payoutPlaceBets(indexofPlacebet,2);
           break;
         case (currentRollnumber = 7):
           console.log("7 out");
@@ -217,35 +265,34 @@ function craps() {
             ...pointBets,
             player1: [0, 0, 0, 0, 0, 0],
           });
+          setPassLine({
+            player1: [0,0]
+          })
           setthePoint(null);
+        
           break;
         case (currentRollnumber = 8):
           console.log("point is 8");
           indexofPlacebet = 3;
+          payoutPlaceBets(indexofPlacebet,2);
           break;
         case (currentRollnumber = 9):
           console.log("point is 9");
           indexofPlacebet = 4;
+          payoutPlaceBets(indexofPlacebet,3);
 
           break;
         case (currentRollnumber = 10):
           console.log("point is 10");
           indexofPlacebet = 5;
+          payoutPlaceBets(indexofPlacebet,3);
+
           break;
       }
+  // 
     }
-    console.log(result);
+   
 
-    if (thePoint != null && currentRollnumber === 7) {
-    } else if (indexofPlacebet !== null && thePoint != null) {
-      let newPayout = pointBets.player1[indexofPlacebet] * 2;
-      let oldBalance = StartingBalance.player1;
-      let finalPayout = newPayout + oldBalance;
-      setStartingBalance({
-        ...StartingBalance,
-        player1: finalPayout,
-      });
-    }
 
     // if (
     //   thePoint === null &&
@@ -272,7 +319,7 @@ function craps() {
       setHard("Soft");
     }
 
-    setdiceroll([dice1, dice2]);
+    
   };
 
   return (
