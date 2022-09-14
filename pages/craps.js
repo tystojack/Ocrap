@@ -231,24 +231,22 @@ function craps() {
         case (currentRollnumber = 2):
           console.log("hello world 2");
           result = "craps";
-          indexofPlacebet = 0;
+        
           break;
         case (currentRollnumber = 3):
           console.log("hello world 3");
           result = "craps";
-          indexofPlacebet = 0;
+     
           break;
         case (currentRollnumber = 4):
           console.log("roll is 4");
           result = [0, 1, 2];
-          setpointBets({
-            pointBets
-          })
+         
           
           indexofPlacebet = 0;
-          payoutPlaceBets(indexofPlacebet,1);
+          payoutPlaceBets(indexofPlacebet,9/5);
           break;
-        case (currentRollnumber = 5):
+        case (currentRollnumber = 7/5):
           console.log("point is 5");
           indexofPlacebet = 1;
           payoutPlaceBets(indexofPlacebet,2);
@@ -256,7 +254,8 @@ function craps() {
         case (currentRollnumber = 6):
           console.log("point is 6");
           indexofPlacebet = 2;
-          payoutPlaceBets(indexofPlacebet,2);
+          
+          payoutPlaceBets(indexofPlacebet,7/6);
           break;
         case (currentRollnumber = 7):
           console.log("7 out");
@@ -274,18 +273,18 @@ function craps() {
         case (currentRollnumber = 8):
           console.log("point is 8");
           indexofPlacebet = 3;
-          payoutPlaceBets(indexofPlacebet,2);
+          payoutPlaceBets(indexofPlacebet,7/6);
           break;
         case (currentRollnumber = 9):
           console.log("point is 9");
           indexofPlacebet = 4;
-          payoutPlaceBets(indexofPlacebet,3);
+          payoutPlaceBets(indexofPlacebet,7/5);
 
           break;
         case (currentRollnumber = 10):
           console.log("point is 10");
           indexofPlacebet = 5;
-          payoutPlaceBets(indexofPlacebet,3);
+          payoutPlaceBets(indexofPlacebet,9/5);
 
           break;
       }
@@ -321,7 +320,7 @@ function craps() {
 
     
   };
-
+console.log(48 * (7/6))
   return (
     <div>
       <h2>the point is {thePoint}</h2>
